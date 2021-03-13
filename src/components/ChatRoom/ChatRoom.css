@@ -18,6 +18,9 @@
     height: 82vh;
     width: 100%;
     background-color: #272727;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: blueviolet #272727;
 }
 .room-message-input-form{
     height: 10vh;

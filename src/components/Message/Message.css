@@ -1,20 +1,38 @@
+.message-box{
+    margin: 0 0.5rem 1rem ;
+    display: flex;
+    flex-direction: column;
+}
+.message{
+    display: flex;
+}
 .message-text{
     max-width: 80%;
     margin: 0 0.5rem;
     padding: 0.5rem 1rem;
-    background-color: rgb(123, 134, 148);
-    color: white;
     font-size: 1.2rem;
     line-height: 30px;
     border-radius: 30px;
 }
-.message{
-    margin: 0 0 1rem 0.5rem;
-    display: flex;
+.sent{
+    align-self: flex-end;
 }
+.sent .message-text{
+    background-color: teal;
+    color: white;
+}
+.received .message-text{
+    background-color: goldenrod;
+}
+
 .user-photo{
     height: 50px;
     width: 50px;
     border-radius: 50px;
     border: 3px solid blue;
+}
+.time{
+    color: white;
+    text-align: right;
+    margin-bottom: 1rem;
 }
