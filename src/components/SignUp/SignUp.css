@@ -1,0 +1,35 @@
+.signup-form{
+    width: 100%;
+    max-width: 450px;
+    margin: 1rem auto;
+    padding: 1rem;
+    /* border: 1px solid; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.signup-form > input {
+    display: block;
+    margin: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    background-color: #272727;
+    color: white;
+}
+.title-text{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.btn{
+    padding: 1rem 1.8rem;
+    background-color: lightgreen;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+}
