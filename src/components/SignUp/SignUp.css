@@ -33,3 +33,7 @@
     border-radius: 30px;
     font-size: 1rem;
 }
+small{
+    display: block;
+    text-align: center;
+}

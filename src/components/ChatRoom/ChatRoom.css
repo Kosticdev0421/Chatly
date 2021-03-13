@@ -1,0 +1,26 @@
+.room{
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+.room-header{
+    height: 8vh;
+    width: 100%;
+    max-width: 450px;
+    background-color: #2e2938;
+    color: white;
+    padding: 0 0.5rem;
+    
+    display: flex;
+    justify-content: space-between;
+}
+.room-message-display{
+    height: 80vh;
+    width: 100%;
+    background-color: #272727;
+}
+.room-message-input{
+    height: 12vh;
+    width: 100%;
+    background-color: #3a3a3a;
+}

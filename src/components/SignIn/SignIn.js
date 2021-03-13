@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
     const emailRef = useRef();
@@ -20,7 +21,9 @@ const SignIn = () => {
 
                 <button className="btn submitBtn">Submit</button>
             </form>
-            <small>Don't have an account? Sign up here!</small>
+            <small>
+                Don't have an account? <Link to="/signUp">Sign up here!</Link>
+            </small>
         </div>
     );
 };

@@ -1,0 +1,7 @@
+.chat-room-list{
+    margin: 1rem auto;
+    padding: 1rem;
+    border: 1px solid;
+    width: 100%;
+    max-width: 450px;
+}

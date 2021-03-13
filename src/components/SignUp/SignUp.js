@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -20,14 +21,21 @@ const SignUp = () => {
         <div>
             <h2 className="title-text">Sign up</h2>
             <form onSubmit={handleSubmit} className="signup-form">
-
                 <input type="text" placeholder="username" required ref={displayNameRef} />
                 <input type="email" placeholder="Email" required ref={emailRef} />
                 <input type="password" placeholder="Password" required ref={passwordRef} />
-                <input type="password" placeholder="confirm password" required ref={passwordConfirmRef} />
+                <input
+                    type="password"
+                    placeholder="confirm password"
+                    required
+                    ref={passwordConfirmRef}
+                />
                 <button className="btn submitBtn">Submit</button>
             </form>
-            <small>Already have an account? Log in here!</small>
+            <small>
+                Already have an account?
+                <Link to="/">Log in here!</Link>
+            </small>
         </div>
     );
 };
