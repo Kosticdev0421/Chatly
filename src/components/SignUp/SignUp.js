@@ -2,6 +2,7 @@ import 'firebase/firestore';
 import React, { useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { auth, firestore } from '../../firebase';
+import Loading from '../Loading/Loading';
 import ShowError from '../ShowError/ShowError';
 import './SignUp.css';
 
@@ -12,16 +13,18 @@ const SignUp = () => {
     const passwordConfirmRef = useRef();
 
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
 
 
     return (
         <div>
+            {loading && <Loading />}
             <h2 className="title-text">Sign up</h2>
             {errorMessage && <ShowError errorMessage={errorMessage} />}
 
             <SignUpForm />
-            
+
             <small>
                 Already have an account?
                 <Link to="/">Log in here!</Link>
@@ -33,21 +36,23 @@ const SignUp = () => {
     
     async function signUpUser(e) {
         e.preventDefault();
+        
         const displayName = displayNameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const passwordConfirm = passwordConfirmRef.current.value;
-
+        
         
         if(password === passwordConfirm){
+            setLoading(true);
             const usersRef = firestore.collection('users');
             
             await auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                               
+                setLoading(false);
+                // const user = userCredential.user;
+                
                 usersRef.doc(displayName).set({
                     displayName,
                     email,
@@ -55,13 +60,16 @@ const SignUp = () => {
                 });
 
                 history.push("/chatRoom");
-                })
-                .catch((error) => {
+            })
+            .catch((error) => {
+                    setLoading(false);
+                    
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    console.log(errorMessage);
                     setErrorMessage(errorMessage);
                 });
-        }
+            }
         else{
             setErrorMessage("Passwords don't match!");
         }

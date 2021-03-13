@@ -1,4 +1,5 @@
 import React from 'react';
+import SignOut from '../SignOut/SignOut';
 import './ChatRoom.css';
 
 const ChatRoom = () => {
@@ -13,7 +14,7 @@ const ChatRoom = () => {
             <header className="room-header">
                 <h2>{"<<"}</h2>
                 <h2>Room name</h2>
-                <h2>i</h2>
+                <SignOut />
             </header>
             <main className="room-message-display">
                 
