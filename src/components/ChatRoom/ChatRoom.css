@@ -7,7 +7,7 @@
     height: 8vh;
     width: 100%;
     max-width: 450px;
-    background-color: #2e2938;
+    background-color: #2e2e2e;
     color: white;
     padding: 0 0.5rem;
     
@@ -15,12 +15,28 @@
     justify-content: space-between;
 }
 .room-message-display{
-    height: 80vh;
+    height: 82vh;
     width: 100%;
     background-color: #272727;
 }
-.room-message-input{
-    height: 12vh;
+.room-message-input-form{
+    height: 10vh;
     width: 100%;
+    background-color: #2e2e2e;
+
+    display: flex;
+    align-items: center;
+}
+.room-message-input-form > input{
+    height: 80%;
+    width: 80%;
+    padding: 1rem 0.5rem;
+    border-radius: 30px 0 0 30px;
     background-color: #3a3a3a;
+}
+
+.sendBtn{
+    height: 80%;
+    width: 20%;
+    border-radius: 0 30px 30px 0;
 }

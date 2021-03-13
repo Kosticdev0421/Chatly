@@ -10,28 +10,19 @@
     align-items: center;
 }
 .signup-form > input {
-    display: block;
+    width: 100%;
     margin: 0.5rem;
     padding: 1rem;
-    width: 100%;
-    outline: none;
     border-radius: 30px;
-    font-size: 1rem;
-    background-color: #272727;
-    color: white;
 }
 .title-text{
     text-align: center;
     font-size: 2rem;
 }
 
-.btn{
+.submitBtn{
     padding: 1rem 1.8rem;
-    background-color: lightgreen;
-    outline: none;
-    border: none;
     border-radius: 30px;
-    font-size: 1rem;
 }
 small{
     display: block;

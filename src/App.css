@@ -5,3 +5,19 @@ body{
     background-color: ghostwhite;
     margin: 0;
 }
+.btn{
+    background-color: lightgreen;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+input{
+    display: block;
+
+    background-color: #272727;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+}

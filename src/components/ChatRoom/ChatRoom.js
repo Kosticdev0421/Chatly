@@ -2,6 +2,12 @@ import React from 'react';
 import './ChatRoom.css';
 
 const ChatRoom = () => {
+
+
+    function sendMessage(e) {
+        e.preventDefault();
+    }
+
     return (
         <div className="room">
             <header className="room-header">
@@ -12,9 +18,10 @@ const ChatRoom = () => {
             <main className="room-message-display">
                 
             </main>
-            <div className="room-message-input">
-
-            </div>
+            <form onSubmit={sendMessage} className="room-message-input-form">
+                <input type="text" placeholder="Write something nice" />
+                <button className="btn sendBtn">Send</button>
+            </form>
 
         </div>
     );
