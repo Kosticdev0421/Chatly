@@ -11,8 +11,9 @@ const ChatRoom = () => {
     const [disabled, setDisabled] = useState(true); 
 
     const messagesRef = firestore.collection("messages");
-    const query = messagesRef.orderBy("time").limit(50);
-    const [messages] = useCollectionData(query, { idField: "id" });
+    const query = messagesRef.orderBy("time", "desc").limit(20);
+    let [messages] = useCollectionData(query, { idField: "id" });
+    messages = messages && messages.reverse();
     
     function sendMessage(e) {
         e.preventDefault();
@@ -38,8 +39,8 @@ const ChatRoom = () => {
             </header>
             <main className="room-message-display">
                 {messages &&
-                    messages.map((message) => {
-                        return <Message key={message.id} message={message} />;
+                    messages.map((message, i) => {
+                        return <Message key={message.id} message={message} length={{i, numberOfMessages: messages.length}} />;
                     })}
                 
             </main>

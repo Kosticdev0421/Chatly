@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import { auth, firestore } from '../../firebase';
 import './Message.css';
 
-const Message = ({message}) => {
+const Message = ({message, length}) => {
+    const bottom = useRef();
     const {text, time, uid} = message;
     const photoURL = message.photoURL ? message.photoURL : "https://www.w3schools.com/w3images/avatar2.png";
     const messageType = uid === auth.currentUser.uid ? "sent" : "received";
@@ -10,8 +11,7 @@ const Message = ({message}) => {
     
     getDisplayName();
     
-    const bottom = useRef();
-    bottom.current && bottom.current.scrollIntoView({ behavior: "smooth", top: bottom.current.offsetTop });
+    length.i === length.numberOfMessages-1 && bottom.current && bottom.current.scrollIntoView({ behavior: "smooth", bottom: bottom.current.offsetBottom });
 
     return (
         <div className={`message-box`}>
@@ -34,8 +34,7 @@ const Message = ({message}) => {
         } else {
             setDisplayName(doc.data().displayName);
             
-    }
-
+        }
     }
 };
 

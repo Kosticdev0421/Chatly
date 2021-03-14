@@ -16,6 +16,7 @@
 }
 .sent{
     align-self: flex-end;
+    flex-direction: row-reverse;
 }
 .sent .message-text{
     background-color: teal;
@@ -33,6 +34,11 @@
 }
 .time{
     color: white;
+    margin: 0.3rem 0 1rem 0;
+}
+.sent+.time{
     text-align: right;
-    margin-bottom: 1rem;
+}
+.received+.time{
+    text-align: left;
 }

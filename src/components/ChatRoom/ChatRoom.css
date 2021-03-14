@@ -51,7 +51,8 @@
     border-radius: 0 30px 30px 0;
 }
 .sendBtn:disabled{
-    filter: blur(1px);
-    color: rgb(105, 156, 105);
+    filter: blur(0.8px);
+    color: white;
     cursor: not-allowed;
+    transition: 0.5s all;
 }
