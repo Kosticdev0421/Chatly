@@ -46,18 +46,24 @@ const SignUp = () => {
         if(password === passwordConfirm){
             setLoading(true);
             const usersRef = firestore.collection('users');
+            const displayNamesRef = firestore.collection('displayNames');
             
             await auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 setLoading(false);
                 // const user = userCredential.user;
+                updateProfile(displayName)
                 
                 usersRef.doc(displayName).set({
                     displayName,
                     email,
-                    password
+                    password,
+                    uid: userCredential.user.uid
                 });
+                displayNamesRef.doc(userCredential.user.uid).set({
+                    displayName
+                })
 
                 history.push("/chatRoom");
             })
@@ -72,6 +78,21 @@ const SignUp = () => {
             }
         else{
             setErrorMessage("Passwords don't match!");
+        }
+
+        function updateProfile(displayName) {
+            const user = auth.currentUser;
+
+            user.updateProfile({
+                displayName
+            })
+            .then(function () {
+                // Update successful.
+            })
+            .catch(function (error) {
+                // An error happened.
+            });
+
         }
     }
 

@@ -22,6 +22,13 @@
     scrollbar-width: thin;
     scrollbar-color: blueviolet #272727;
 }
+.room-message-display::-webkit-scrollbar{
+    width: 8px;
+}
+.room-message-display::-webkit-scrollbar-thumb{
+    background-color: blueviolet;
+    border-radius: 10px;
+}
 .room-message-input-form{
     height: 10vh;
     width: 100%;
