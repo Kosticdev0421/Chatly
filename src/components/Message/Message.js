@@ -11,7 +11,7 @@ const Message = ({message, length}) => {
     
     getDisplayName();
     
-    length.i === length.numberOfMessages-1 && bottom.current && bottom.current.scrollIntoView({ behavior: "smooth", bottom: bottom.current.offsetBottom });
+    length.i === length.numberOfMessages-1 && length.numberOfMessages <= 20 && bottom.current && bottom.current.scrollIntoView({ behavior: "smooth", bottom: bottom.current.offsetBottom });
 
     return (
         <div className={`message-box`}>

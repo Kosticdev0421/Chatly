@@ -18,6 +18,7 @@
     height: 82vh;
     width: 100%;
     background-color: #272727;
+    text-align: center;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: blueviolet #272727;
@@ -55,16 +56,4 @@
     color: white;
     cursor: not-allowed;
     transition: 0.5s all;
-}
-.emptyMessage{
-    animation: warning 1s ease;
-}
-
-@keyframes warning {
-    from{
-        border: 2px solid red;
-    }
-    to{
-        border: none;
-    }
 }

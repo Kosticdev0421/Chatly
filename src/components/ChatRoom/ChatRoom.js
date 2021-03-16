@@ -10,14 +10,14 @@ import './ChatRoom.css';
 const ChatRoom = () => {
     const { roomId } = useParams();
     const messageInputRef = useRef();
-    const [emptyMessage, setEmptyMessage] = useState(false);
+    const [messageLimit, setMessageLimit] = useState(20);
 
 // ############## Option 1.1: Loading only room messages from all messages ( Completed )
     const messagesRef = firestore.collection("messages");
     const roomMessagesRef = messagesRef
         .where("roomId", "==", roomId)
         .orderBy("time", "desc")
-        .limit(30);
+        .limit(messageLimit);
     let [messages] = useCollectionData(roomMessagesRef, { idField: "id" });
     messages = messages && messages.reverse();
     console.log(messages);
@@ -52,7 +52,7 @@ const ChatRoom = () => {
         const text = messageInputRef.current.value;
         const { uid } = auth.currentUser;
 
-        if(text) {
+        if(text.replaceAll(' ', '')) {
             // roomRef.update(
             //     {
             //         messages: firebase.firestore.FieldValue.arrayUnion({
@@ -70,10 +70,7 @@ const ChatRoom = () => {
                 roomId,
             })
         }
-        else setEmptyMessage(true);
-        setTimeout(() => {
-            setEmptyMessage(false);
-        }, 1000);
+
         messageInputRef.current.value = "";
     }
 
@@ -85,6 +82,9 @@ const ChatRoom = () => {
                 <SignOut />
             </header>
             <main className="room-message-display">
+
+            <button className="btn" onClick={() => setMessageLimit(messageLimit + 10)}>Load more</button>
+            {!messages && <h2 style={{color: 'white'}}>Loading conversations...</h2> }
                 {messages &&
                     messages.map((message, i) => {
                         return (
@@ -101,11 +101,10 @@ const ChatRoom = () => {
                     type="text"
                     placeholder="Write something nice"
                     ref={messageInputRef}
-                    className={emptyMessage ? "emptyMessage": "notEmpty"}
+                    required
+                    onInvalid={(e) => e.target.setCustomValidity('Write something nice here😊')}
                 />
-                <button className="btn sendBtn">
-                    Send
-                </button>
+                <button className="btn sendBtn">Send</button>
             </form>
         </div>
     );
