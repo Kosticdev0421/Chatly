@@ -27,8 +27,8 @@ const Message = ({message, length}) => {
     );
 
     async function getDisplayName() {
-        const nameRef = firestore.collection("displayNames").doc(uid);
-        const doc = await nameRef.get();
+        const usersInfoRef = firestore.collection("usersInfo").doc(uid);
+        const doc = await usersInfoRef.get();
         if (!doc.exists) {
             console.log("No such document!");
         } else {

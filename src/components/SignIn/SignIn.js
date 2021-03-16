@@ -31,7 +31,6 @@ const SignIn = () => {
         
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log(email, password);
 
 
         await auth.signInWithEmailAndPassword(email, password)
@@ -45,7 +44,7 @@ const SignIn = () => {
             .catch((error) => {
                 setLoading(false);
 
-                var errorCode = error.code;
+                // var errorCode = error.code;
                 var errorMessage = error.message;
                 setErrorMessage(errorMessage);
             });

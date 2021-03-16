@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Link } from 'react-router-dom';
+import { auth, firestore } from '../../firebase';
 import "./ChatRoomsList.css";
 
 const ChatRoomsList = () => {
-    const [chatRooms, setChatRooms] = useState(["Math group 🥇", "Family 💪"])
+    const currentUser = auth.currentUser;
+    
+    const usersInfoRef = firestore.collection('usersInfo');
+    const [usersInfo] = useCollectionData(usersInfoRef, {idField: "id"});
+    const roomsIdList = usersInfo && usersInfo.filter(user => user.id === currentUser.uid)[0].rooms;
+
+    const chatRoomsListRef = firestore.collection("chatRoomsList");
+    let [roomsList] = useCollectionData(chatRoomsListRef, {idField: "id"});
+    console.log("!!!", roomsList);
+    roomsList = roomsList && roomsIdList.map(id => {
+        const room = roomsList.filter(room => {
+            return room.id === id
+        })
+        return room[0];
+    })
+    console.log("Rooms list:", roomsList);
+    
+
     return (
         <div>
-            {
-                chatRooms.map(room => {
-                    return (
-                        <div className="chat-room-list">
-                            {room}
-                        </div>
-                    )
-                })
-            }
+            {roomsList && roomsList.map((room) => {
+                return <div key={room.id} className="chat-room-list">
+                <Link to={`/chatRoom/${room.id}`}>
+                    {room.roomName}
+                </Link>
+                </div>;
+            })}
         </div>
     );
+
 };
 
 export default ChatRoomsList;

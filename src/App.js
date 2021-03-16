@@ -13,7 +13,7 @@ function App() {
       <Router>
           <Switch>
               <Route exact path="/">
-                  {user ? <ChatRoom /> : <SignIn />}
+                  {user ? <ChatRoomsList /> : <SignIn />}
               </Route>
               <Route exact path="/signup">
                   <SignUp />
@@ -21,7 +21,7 @@ function App() {
               <Route exact path="/chatRoomsList">
                   {user && <ChatRoomsList />}
               </Route>
-              <Route exact path="/chatRoom">
+              <Route exact path="/chatRoom/:roomId">
                   {user ? <ChatRoom /> : <SignIn />}
               </Route>
           </Switch>

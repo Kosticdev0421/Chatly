@@ -46,7 +46,7 @@ const SignUp = () => {
         if(password === passwordConfirm){
             setLoading(true);
             const usersRef = firestore.collection('users');
-            const displayNamesRef = firestore.collection('displayNames');
+            const usersInfoRef = firestore.collection('usersInfo');
             
             await auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
@@ -61,16 +61,17 @@ const SignUp = () => {
                     password,
                     uid: userCredential.user.uid
                 });
-                displayNamesRef.doc(userCredential.user.uid).set({
-                    displayName
-                })
+                usersInfoRef.doc(userCredential.user.uid).set({
+                    displayName,
+                    rooms: ["5BpeqoIHeR9WCLMnNGui"],
+                });
 
                 history.push("/chatRoom");
             })
             .catch((error) => {
                     setLoading(false);
                     
-                    const errorCode = error.code;
+                    // const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage);
                     setErrorMessage(errorMessage);
