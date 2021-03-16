@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { auth, firestore } from '../../firebase';
 import Message from '../Message/Message';
 import SignOut from '../SignOut/SignOut';
@@ -11,6 +12,7 @@ const ChatRoom = () => {
     const { roomId } = useParams();
     const messageInputRef = useRef();
     const [messageLimit, setMessageLimit] = useState(20);
+    const [roomName] = useDocumentData(firestore.collection("chatRoomsList").doc(roomId));
 
 // ############## Option 1.1: Loading only room messages from all messages ( Completed )
     const messagesRef = firestore.collection("messages");
@@ -70,27 +72,31 @@ const ChatRoom = () => {
                 roomId,
             })
         }
-
         messageInputRef.current.value = "";
     }
+
 
     return (
         <div className="room">
             <header className="room-header">
-                <h2>❌</h2>
-                <h2>{/*room && room.roomName*/}Name</h2>
+                <Link to="/chatRoomsList" className="link-text">
+                    <h2>⬅</h2>
+                </Link>
+                <h2>{roomName && roomName.roomName}</h2>
                 <SignOut />
             </header>
             <main className="room-message-display">
-
-            <button className="btn" onClick={() => setMessageLimit(messageLimit + 10)}>Load more</button>
-            {!messages && <h2 style={{color: 'white'}}>Loading conversations...</h2> }
+                <button className="btn" onClick={() => setMessageLimit(messageLimit + 10)}>
+                    Load more
+                </button>
+                {!messages && <h2 style={{ color: "ghostWhite" }}>Loading conversations...</h2>}
                 {messages &&
-                    messages.map((message, i) => {
+                    messages.map((message, i, msgs) => {
                         return (
                             <Message
                                 key={i}
                                 message={message}
+                                nextMessage={msgs[i+1]}
                                 length={{ i, numberOfMessages: messages.length }}
                             />
                         );
@@ -102,7 +108,7 @@ const ChatRoom = () => {
                     placeholder="Write something nice"
                     ref={messageInputRef}
                     required
-                    onInvalid={(e) => e.target.setCustomValidity('Write something nice here😊')}
+                    onInvalid={(e) => e.target.setCustomValidity("Write something nice here😊")}
                 />
                 <button className="btn sendBtn">Send</button>
             </form>

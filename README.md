@@ -1,13 +1,13 @@
 ## Features added ->
-- [ - ] username
-- [ - ] Time
-- [ - ] Scroll to last message
-- [ - ] multiple chat room
+- [x] username
+- [x] Time
+- [x] Scroll to last message
+- [x] multiple chat room
+- [x] load more messages on click
+- [x] Don't show time and name when consecutive two msgs are from same user and sent less than 2 min ago
 
 
 ## Features to be added ->
-- [ ] load more messages on scroll
 - [ ] active status
 - [ ] notification
 - [ ] Profile photo
-- [ ] Don't show time and name when consecutive two msgs are from same user  

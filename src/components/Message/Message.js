@@ -1,17 +1,26 @@
-import React, { useRef, useState } from 'react';
-import { auth, firestore } from '../../firebase';
-import './Message.css';
+import React, { useRef, useState } from "react";
+import { auth, firestore } from "../../firebase";
+import "./Message.css";
 
-const Message = ({message, length}) => {
+const Message = ({ message, length, nextMessage }) => {
     const bottom = useRef();
-    const {text, time, uid} = message;
-    const photoURL = message.photoURL ? message.photoURL : "https://www.w3schools.com/w3images/avatar2.png";
-    const messageType = uid === auth.currentUser.uid ? "sent" : "received";
+    const { text, time, uid } = message;
     const [displayName, setDisplayName] = useState("");
-    
     getDisplayName();
-    
-    length.i === length.numberOfMessages-1 && length.numberOfMessages <= 20 && bottom.current && bottom.current.scrollIntoView({ behavior: "smooth", bottom: bottom.current.offsetBottom });
+    const photoURL = message.photoURL
+        ? message.photoURL
+        : "https://www.w3schools.com/w3images/avatar2.png";
+    const messageType = uid === auth.currentUser.uid ? "sent" : "received";
+    const lastMessage = length.i === length.numberOfMessages - 1;
+    const loadMoreMessages = length.numberOfMessages > 20;
+
+
+    const consecutiveTwoMsgsAreNotFromSameUserAndSentMoreThan2MinAgo = nextMessage?.uid !== uid && nextMessage?.time - time > 12000;
+
+    lastMessage &&
+        !loadMoreMessages &&
+        bottom.current &&
+        bottom.current.scrollIntoView({ behavior: "smooth", bottom: bottom.current.offsetBottom });
 
     return (
         <div className={`message-box`}>
@@ -19,9 +28,12 @@ const Message = ({message, length}) => {
                 <img src={photoURL} alt="" className="user-photo" />
                 <p className="message-text">{text}</p>
             </div>
-            <small className="time">
-                {displayName} at {new Date(time).toLocaleTimeString()}
-            </small>
+            {(consecutiveTwoMsgsAreNotFromSameUserAndSentMoreThan2MinAgo ||
+                lastMessage) && (
+                    <small className="time">
+                        {displayName} at {new Date(time).toLocaleTimeString()}
+                    </small>
+                )}
             <span ref={bottom}></span>
         </div>
     );
@@ -33,7 +45,6 @@ const Message = ({message, length}) => {
             console.log("No such document!");
         } else {
             setDisplayName(doc.data().displayName);
-            
         }
     }
 };
