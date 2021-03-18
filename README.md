@@ -11,3 +11,6 @@
 - [ ] active status
 - [ ] notification
 - [ ] Profile photo
+- [ ] Private route for room
+- [ ] Create room
+- [ ] Leave room

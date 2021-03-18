@@ -27,19 +27,20 @@ const ChatRoomsList = () => {
     return (
         <div className="chat-room-list-box">
             <SignOut />
+
             {roomsList &&
                 roomsList.map((room) => {
                     return (
                         <div key={room.id} className="chat-room-list">
-                            <Link
-                                to={`/chatRoom/${room.id}`}
-                                className="link-text"
-                            >
+                            <Link to={`/chatRoom/${room.id}`} className="link-text">
                                 {room.roomName}
                             </Link>
                         </div>
                     );
                 })}
+            <Link to="/createRoom" >
+                <button className="btn submitBtn">➕ Create</button>
+            </Link>
         </div>
     );
 
