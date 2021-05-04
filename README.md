@@ -1,4 +1,4 @@
-# Chatly
+# [Chatly](https://chat-with-chatly.netlify.app/)
 
 ## Features added ->
 - [x] username
@@ -19,3 +19,5 @@
 ## Tools
 - REACT
 - FIREBASE
+
+## [Live View](https://chat-with-chatly.netlify.app/)
